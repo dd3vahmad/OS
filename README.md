@@ -72,7 +72,7 @@ This will start the app with live-reloading enabled, so any changes you make wil
 
 ## Files Overview:
 
-- **server.js**: The Express server that serves the system information and handles real-time communication via Socket.io.
+- **index.js**: The Express server that serves the system information and handles real-time communication via Socket.io.
 - **views/i.pug**: The Pug template that renders the system information in the browser.
 - **public/styles.css**: The styles for the app (you can modify this to customize the look and feel).
 
