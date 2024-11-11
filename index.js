@@ -11,14 +11,41 @@ app.use(express.static("public"));
 
 // Route to render the OS details
 app.get("/", (req, res) => {
-  const osDetails = {
-    platform: os.platform(),
-    freemem: os.freemem(),
-    totalmem: os.totalmem(),
-    cpus: os.cpus(),
-    uptime: os.uptime(),
-  };
-  res.render("i", { osDetails });
+  const totalmem = os.totalmem() / (1024 * 1024); // Convert to MB
+  const freemem = os.freemem() / (1024 * 1024); // Convert to MB
+  const usedMemory = totalmem - freemem;
+  const usedMemoryPercentage = (usedMemory / totalmem) * 100;
+  const freeMemoryPercentage = (freemem / totalmem) * 100;
+
+  // Gathering other os info
+  const uptime = os.uptime();
+  const platform = os.platform();
+  const arch = os.arch();
+  const hostname = os.hostname();
+  const cpus = os.cpus();
+  const networkInterfaces = os.networkInterfaces();
+  const osRelease = os.release();
+  const osType = os.type();
+  const loadAvg = os.loadavg();
+  const userInfo = os.userInfo();
+
+  res.render("i", {
+    totalmem,
+    freemem,
+    usedMemory,
+    usedMemoryPercentage,
+    freeMemoryPercentage,
+    uptime,
+    platform,
+    arch,
+    hostname,
+    cpus,
+    networkInterfaces,
+    osRelease,
+    osType,
+    loadAvg,
+    userInfo,
+  });
 });
 
 const port = process.env.PORT || 3000;

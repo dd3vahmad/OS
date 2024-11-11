@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Base styles for fonts and colors */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+.text-gold {
+  color: #daa520; /* Gold color */
+}
+
+.bg-gold {
+  background-color: #daa520; /* Gold background */
+}
+
+.bg-bold {
+  background-color: #b8860b; /* Darker gold color for used memory */
+}
+
+header {
+  background-color: black;
+  color: #daa520; /* Gold */
+}
+
+/* Container styling */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Memory loader animation */
+@keyframes loader {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Free memory bar animation */
+.bg-gold {
+  animation: loader 2s ease-in-out;
+}
+
+/* Card styles for sections */
+section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Fade-in animation for sections */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer styling */
+footer {
+  background-color: black;
+  color: #daa520;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 2rem;
+}

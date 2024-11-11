@@ -1,15 +1,59 @@
 doctype html
-html
+html(lang="en")
   head
-    title OS Details
-    link(rel="stylesheet", href="/styles.css")
-  body(class="bg-gray-100 text-gray-900")
-    .container.mx-auto.p-8
-      h1.text-4xl.font-bold.mb-4 OS Details
-      p Platform: #{osDetails.platform}
-      p Free Memory: #{osDetails.freemem}
-      p Total Memory: #{osDetails.totalmem}
-      p Uptime: #{osDetails.uptime}
-      ul
-        each cpu, i in osDetails.cpus
-          li CPU #{i + 1}: #{cpu.model} (#{cpu.speed} MHz)
+    title OS System Information
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="/styles.css")
+  body
+    .container.mx-auto.px-4
+      header.text-center.bg-black.text-gold.py-6.rounded-lg.shadow-lg.mb-6
+        h1.text-4xl.font-bold.text-gold OS System Information
+        p.text-xl My system details provided by Node.js
+
+      section.bg-white.p-6.rounded-lg.shadow-lg.mb-6
+        h2.text-2xl.font-bold.text-black.mb-4 Memory Information
+        .flex.items-center
+          .w-full.bg-gray-300.h-6.rounded-lg.overflow-hidden
+            .bg-gold.h-6(style=`width: ${usedMemoryPercentage}%`)
+            .bg-bold.h-6(style=`width: ${freeMemoryPercentage}%`)
+
+          p.ml-4.text-sm.font-medium.text-black Free Memory: #{freemem.toFixed(2)} MB
+
+      section.bg-white.p-6.rounded-lg.shadow-lg.mb-6
+        h2.text-2xl.font-bold.text-black.mb-4 CPU Information
+        ul
+          each cpu, index in cpus
+            li.mb-4
+              h3.text-lg.font-semibold.text-black CPU #{index + 1}: #{cpu.model}
+              p.text-sm.font-medium.text-gray-600 Speed: #{cpu.speed} MHz
+              canvas(id=`cpuChart${index}`, width="100", height="100")
+
+      section.bg-white.p-6.rounded-lg.shadow-lg.mb-6
+        h2.text-2xl.font-bold.text-black.mb-4 System Uptime
+        p.text-lg.font-medium.text-black Uptime: #{Math.floor(uptime / 3600)} hours
+
+      section.bg-white.p-6.rounded-lg.shadow-lg.mb-6
+        h2.text-2xl.font-bold.text-black.mb-4 Platform and Architecture
+        p.text-lg.font-medium.text-black Platform: #{platform}
+        p.text-lg.font-medium.text-black Architecture: #{arch}
+
+      section.bg-white.p-6.rounded-lg.shadow-lg.mb-6
+        h2.text-2xl.font-bold.text-black.mb-4 Hostname & OS Details
+        p.text-lg.font-medium.text-black Hostname: #{hostname}
+        p.text-lg.font-medium.text-black OS Type: #{osType}
+        p.text-lg.font-medium.text-black OS Release: #{osRelease}
+
+      section.bg-white.p-6.rounded-lg.shadow-lg.mb-6
+        h2.text-2xl.font-bold.text-black.mb-4 Load Average
+        p.text-lg.font-medium.text-black 1-minute load average: #{loadAvg[0].toFixed(2)}
+        p.text-lg.font-medium.text-black 5-minute load average: #{loadAvg[1].toFixed(2)}
+        p.text-lg.font-medium.text-black 15-minute load average: #{loadAvg[2].toFixed(2)}
+
+      section.bg-white.p-6.rounded-lg.shadow-lg.mb-6
+        h2.text-2xl.font-bold.text-black.mb-4 User Information
+        p.text-lg.font-medium.text-black Username: #{userInfo.username}
+        p.text-lg.font-medium.text-black Home Directory: #{userInfo.homedir}
+
+      footer.text-center.py-4.bg-black.text-gold.mt-8.rounded-lg
+        p.text-gold.text-md Built with love using Node.js, Express, and Pug
