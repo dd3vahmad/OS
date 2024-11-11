@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title OS Details
+    link(rel="stylesheet", href="/styles.css")
+  body(class="bg-gray-100 text-gray-900")
+    .container.mx-auto.p-8
+      h1.text-4xl.font-bold.mb-4 OS Details
+      p Platform: #{osDetails.platform}
+      p Free Memory: #{osDetails.freemem}
+      p Total Memory: #{osDetails.totalmem}
+      p Uptime: #{osDetails.uptime}
+      ul
+        each cpu, i in osDetails.cpus
+          li CPU #{i + 1}: #{cpu.model} (#{cpu.speed} MHz)
